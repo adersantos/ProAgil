@@ -12,6 +12,7 @@ namespace ProAgil.Repository
         public ProAgilRepository(ProAgilContext context)
         {
             _context = context;
+            _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
 
         public void Add<T>(T entity) where T : class
@@ -65,7 +66,7 @@ namespace ProAgil.Repository
 
                 query = query.OrderByDescending(c => c.DataEvento).Where( c => c.Id == eventoId);
 
-                return query.FirstOrDefault();
+                return await query.FirstOrDefaultAsync();
         }
 
         public async Task<Evento[]> GetAllEventoAsyncByTema(string tema, bool includePalestrantes = false)

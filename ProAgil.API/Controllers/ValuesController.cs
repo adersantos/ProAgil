@@ -18,6 +18,8 @@ namespace ProAgil.API.Controllers
         public ValuesController(ProAgilContext context)
         {
             _context = context;
+            _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+
         }
 
         // GET api/values
